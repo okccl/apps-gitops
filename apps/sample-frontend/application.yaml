@@ -14,10 +14,10 @@ spec:
       helm:
         valueFiles:
           - $values/apps/sample-frontend/values.yaml
-    - repoURL: https://github.com/ccl-labs/platform-gitops.git
+    - repoURL: https://github.com/ccl-labs/apps-gitops.git
       targetRevision: main
       ref: values
-    - repoURL: https://github.com/ccl-labs/platform-gitops.git
+    - repoURL: https://github.com/ccl-labs/apps-gitops.git
       targetRevision: main
       path: apps/sample-frontend/manifests
   destination:
@@ -27,7 +27,6 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       jqPathExpressions:
-        # Gateway API が parentRefs にデフォルト補完するフィールドを無視
         - .spec.parentRefs[].group
         - .spec.parentRefs[].kind
   syncPolicy:

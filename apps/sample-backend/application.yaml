@@ -27,20 +27,16 @@ spec:
     - group: argoproj.io
       kind: Rollout
       jsonPointers:
-        # KEDA が管理する replicaCount は無視
         - /spec/replicas
-        # Helm のデフォルト値として付与される protocol: TCP を無視
         - /spec/template/spec/containers/0/ports/0/protocol
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       jqPathExpressions:
-        # Gateway API が parentRefs にデフォルト補完するフィールドを無視
         - .spec.parentRefs[].group
         - .spec.parentRefs[].kind
     - group: external-secrets.io
       kind: ExternalSecret
       jqPathExpressions:
-        # ESO controller がデフォルト補完するフィールドを無視
         - .spec.data[].remoteRef.conversionStrategy
         - .spec.data[].remoteRef.decodingStrategy
         - .spec.data[].remoteRef.metadataPolicy
@@ -53,5 +49,4 @@ spec:
       selfHeal: true
     syncOptions:
       - ServerSideApply=true
-      # ignoreDifferences のフィールドを sync 時にも上書きしない
       - RespectIgnoreDifferences=true
