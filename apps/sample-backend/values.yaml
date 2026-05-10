@@ -46,6 +46,8 @@ db:
     endpointURL: "http://host.k3d.internal:9000"
     bucketName: "cnpg-backup"
     secretName: "minio-backup-secret"
+  monitoring:
+    enablePodMonitor: true
   resources:
     requests:
       cpu: 100m
