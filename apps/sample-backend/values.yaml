@@ -38,6 +38,7 @@ db:
   instances: 2
   postgresVersion: 17
   storageSize: 1Gi
+  storageClassName: local-path-retain
   database: app
   owner: app
   backup:
