@@ -24,6 +24,11 @@ spec:
     server: https://kubernetes.default.svc
     namespace: sample-app
   ignoreDifferences:
+    - group: postgresql.cnpg.io
+      kind: Cluster
+      jsonPointers:
+        - /spec/bootstrap
+        - /spec/externalClusters
     - group: argoproj.io
       kind: Rollout
       jsonPointers:
