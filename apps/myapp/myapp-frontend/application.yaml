@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-frontend
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: myapp
+  sources:
+    - repoURL: https://github.com/okccl/platform-charts.git
+      targetRevision: main
+      path: charts/generic-frontend
+      helm:
+        valueFiles:
+          - $values/apps/myapp/myapp-frontend/values.yaml
+    - repoURL: https://github.com/okccl/apps-gitops.git
+      targetRevision: main
+      ref: values
+    - repoURL: https://github.com/okccl/apps-gitops.git
+      targetRevision: main
+      path: apps/myapp/myapp-frontend/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+  ignoreDifferences:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      jqPathExpressions:
+        - .spec.parentRefs[].group
+        - .spec.parentRefs[].kind
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
