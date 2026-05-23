@@ -33,7 +33,6 @@ spec:
       kind: Rollout
       jsonPointers:
         - /spec/replicas
-        - /spec/template/spec/containers/0/ports/0/protocol
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       jqPathExpressions:
