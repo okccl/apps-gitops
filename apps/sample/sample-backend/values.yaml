@@ -55,6 +55,12 @@ db:
     limits:
       cpu: 500m
       memory: 512Mi
+  recovery:
+    enabled: true
+    source: minio-backup
+    endpointURL: "http://host.k3d.internal:9000"
+    bucketName: "cnpg-backup"
+    secretName: "minio-backup-secret"
 env:
   - name: OTEL_EXPORTER_OTLP_ENDPOINT
     value: "http://tempo.tracing.svc.cluster.local:4318"
