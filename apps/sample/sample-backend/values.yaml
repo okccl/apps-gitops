@@ -46,6 +46,7 @@ db:
     endpointURL: "http://host.k3d.internal:9000"
     bucketName: "cnpg-backup"
     secretName: "minio-backup-secret"
+    serverName: "sample-backend-db-20260526"
   monitoring:
     enablePodMonitor: true
   resources:
@@ -61,6 +62,7 @@ db:
     endpointURL: "http://host.k3d.internal:9000"
     bucketName: "cnpg-backup"
     secretName: "minio-backup-secret"
+    serverName: "sample-backend-db"
 env:
   - name: OTEL_EXPORTER_OTLP_ENDPOINT
     value: "http://tempo.tracing.svc.cluster.local:4318"
